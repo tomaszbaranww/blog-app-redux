@@ -1,6 +1,7 @@
 {
     "name": "blog-app-redux",
     "version": "0.1.0",
+    "homepage": "https://panwidmo.github.io/blog-app-redux",
     "private": true,
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.5",
@@ -16,7 +17,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
         "extends": [
@@ -39,6 +42,7 @@
     "devDependencies": {
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",
+        "gh-pages": "^5.0.0",
         "husky": "^8.0.3",
         "lint-staged": "^13.2.2",
         "prettier": "^2.8.8"
