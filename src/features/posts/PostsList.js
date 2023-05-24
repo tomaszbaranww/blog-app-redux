@@ -1,26 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useRef } from 'react';
-import { selectAllPosts, getPostsStatus, getPostsError, fetchPosts } from 'features/posts/postsSlice';
+import { useSelector } from 'react-redux';
+import { selectAllPosts, getPostsStatus, getPostsError } from 'features/posts/postsSlice';
 import { PostsExcerpt } from 'features/posts/PostsExcerpt';
 export const PostsList = () => {
-    const effectRan = useRef(false);
-    const dispatch = useDispatch();
-
     const posts = useSelector(selectAllPosts);
     const postStatus = useSelector(getPostsStatus);
     const postError = useSelector(getPostsError);
-
-    useEffect(() => {
-        if (effectRan.current === false) {
-            if (postStatus === 'idle') {
-                dispatch(fetchPosts());
-            }
-
-            return () => {
-                effectRan.current = true;
-            };
-        }
-    }, [postStatus, dispatch]);
 
     let content;
 
@@ -33,10 +17,5 @@ export const PostsList = () => {
         content = <p>{postError}</p>;
     }
 
-    return (
-        <section>
-            <h2>Posts</h2>
-            {content}
-        </section>
-    );
+    return <section>{content}</section>;
 };
