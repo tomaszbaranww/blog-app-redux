@@ -1,4 +1,4 @@
-import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import { sub } from 'date-fns';
 import api from 'api/axios';
 
@@ -16,6 +16,30 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost) => {
     const response = await api.post('/posts', initialPost);
     return response.data;
+});
+
+export const updatePost = createAsyncThunk('posts/updatePost', async (initialPost) => {
+    const { id } = initialPost;
+
+    try {
+        const response = await api.put(`/posts/${id}`, initialPost);
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+});
+
+export const deletePost = createAsyncThunk('posts/deletePost', async (initialPost) => {
+    const { id } = initialPost;
+
+    try {
+        const response = await api.delete(`/posts/${id}`);
+        // because of jsonplaceholder.com
+        if (response?.status === 200) return initialPost;
+        return `${response?.status}: ${response?.statusText}`;
+    } catch (error) {
+        return error.message;
+    }
 });
 
 const postsSlice = createSlice({
@@ -97,6 +121,27 @@ const postsSlice = createSlice({
                     coffee: 0,
                 };
                 state.posts.push(action.payload);
+            })
+
+            .addCase(updatePost.fulfilled, (state, action) => {
+                if (!action.payload?.id) {
+                    console.log('Update could not complete');
+                    console.log(action.payload);
+                    return;
+                }
+                const { id } = action.payload;
+                action.payload.date = new Date().toISOString();
+                const posts = state.posts.filter((post) => post.id !== id);
+                state.posts = [...posts, action.payload];
+            })
+            .addCase(deletePost.fulfilled, (state, action) => {
+                if (!action.payload?.id) {
+                    console.log('Delete could not complete');
+                    console.log(action.payload);
+                    return;
+                }
+                const { id } = action.payload;
+                state.posts = state.posts.filter((post) => post.id !== id);
             });
     },
 });
@@ -106,6 +151,8 @@ export const selectAllPosts = (state) => state.posts.posts;
 export const getPostsStatus = (state) => state.posts.status;
 
 export const getPostsError = (state) => state.posts.error;
+
+export const selectPostById = (state, postId) => state.posts.posts.find((post) => post.id === postId);
 
 export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
