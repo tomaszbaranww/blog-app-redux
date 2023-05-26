@@ -1,0 +1,33 @@
+.header {
+    padding: 0.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkblue;
+    color: whitesmoke;
+    position: sticky;
+    top: 0;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    ul {
+        list-style-type: none;
+
+        li {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+    }
+
+    a {
+        color: whitesmoke;
+        text-decoration: none;
+    }
+
+    button {
+        margin-bottom: 0;
+    }
+}
