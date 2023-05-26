@@ -3,8 +3,11 @@ import { PostAuthor } from 'features/posts/PostAuthor';
 import { TimeAgo } from 'features/posts/TimeAgo';
 import { ReactionButtons } from 'features/posts/ReactionButtons';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectPostById } from 'features/posts/postsSlice';
 
-export const PostsExcerpt = ({ post }) => {
+export const PostsExcerpt = ({ postId }) => {
+    const post = useSelector((state) => selectPostById(state, postId));
     return (
         <article>
             <h2>{post.title}</h2>
