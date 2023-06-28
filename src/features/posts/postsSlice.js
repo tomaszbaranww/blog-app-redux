@@ -9,7 +9,6 @@ const postsAdapter = createEntityAdapter({
 const initialState = postsAdapter.getInitialState({
     status: 'idle', // 'idle' | 'loading | 'succeeded' | 'failed'
     error: null,
-    count: 0,
 });
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -57,9 +56,6 @@ const postsSlice = createSlice({
             if (existingPost) {
                 existingPost.reactions[reaction]++;
             }
-        },
-        increaseCount(state) {
-            state.count = state.count + 1;
         },
     },
     extraReducers(builder) {
@@ -135,11 +131,9 @@ export const getPostsStatus = (state) => state.posts.status;
 
 export const getPostsError = (state) => state.posts.error;
 
-export const getCount = (state) => state.posts.count;
-
 export const selectPostsByUser = createSelector([selectAllPosts, (state, userId) => userId], (posts, userId) =>
     posts.filter((post) => post.userId === userId)
 );
 
-export const { reactionAdded, increaseCount } = postsSlice.actions;
+export const { reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
