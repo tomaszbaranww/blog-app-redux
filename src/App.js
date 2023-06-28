@@ -11,7 +11,7 @@ import { UserPage } from 'features/users/UserPage';
 export const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/blog-app-redux" element={<Layout />}>
                 <Route index element={<PostsList />} />
                 <Route path="post">
                     <Route index element={<AddPostForm />} />
@@ -24,7 +24,7 @@ export const App = () => {
                 </Route>
 
                 {/*Catch all*/}
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="*" element={<Navigate to="/blog-app-redux" replace />} />
             </Route>
         </Routes>
     );

@@ -40,7 +40,7 @@ export const EditPostForm = () => {
                 setTitle('');
                 setContent('');
                 setUserId('');
-                navigate(`/post/${postId}`);
+                navigate(`/blog-app-redux/post/${postId}`);
             } catch (err) {
                 console.error('Failed to save the post', err);
             } finally {
@@ -63,7 +63,7 @@ export const EditPostForm = () => {
             setTitle('');
             setContent('');
             setUserId('');
-            navigate('/');
+            navigate('/blog-app-redux');
         } catch (error) {
             console.error('Failed to delete post', error);
         } finally {

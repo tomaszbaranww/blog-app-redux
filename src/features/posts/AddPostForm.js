@@ -29,7 +29,7 @@ export const AddPostForm = () => {
                 setTitle('');
                 setContent('');
                 setUserId('');
-                navigate('/');
+                navigate('/blog-app-redux');
             } catch (err) {
                 console.error('Failed to save the post', err);
             } finally {
