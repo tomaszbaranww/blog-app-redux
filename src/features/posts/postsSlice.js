@@ -103,13 +103,12 @@ const postsSlice = createSlice({
                     rocket: 0,
                     coffee: 0,
                 };
-                console.log(action.payload);
                 postsAdapter.addOne(state, action.payload);
             })
             .addCase(updatePost.fulfilled, (state, action) => {
                 if (!action.payload?.id) {
-                    console.log('Update could not complete');
-                    console.log(action.payload);
+                    console.error('Update could not complete');
+                    console.error(action.payload);
                     return;
                 }
                 action.payload.date = new Date().toISOString();
@@ -117,8 +116,8 @@ const postsSlice = createSlice({
             })
             .addCase(deletePost.fulfilled, (state, action) => {
                 if (!action.payload?.id) {
-                    console.log('Delete could not complete');
-                    console.log(action.payload);
+                    console.error('Delete could not complete');
+                    console.error(action.payload);
                     return;
                 }
                 const { id } = action.payload;
