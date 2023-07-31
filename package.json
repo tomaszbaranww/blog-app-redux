@@ -1,7 +1,7 @@
 {
     "name": "blog-app-redux",
     "version": "0.1.0",
-    "homepage": "https://panwidmo.github.io/blog-app-redux",
+    "homepage": "https://tomaszbaranww.github.io/blog-app-redux",
     "private": true,
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.5",
