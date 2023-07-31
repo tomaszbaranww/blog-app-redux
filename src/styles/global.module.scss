@@ -59,3 +59,17 @@ form {
     display: flex;
     flex-direction: column;
 }
+
+li:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+a {
+    color: whitesmoke;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:is(:hover, :active, :focus) {
+        text-decoration: underline;
+    }
+}
